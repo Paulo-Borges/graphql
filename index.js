@@ -10,6 +10,7 @@ const typeDefs = gql`
     horaAtual: String
     dataAtual: Data
     melhorUsuario: Usuario!
+    melhorProduto: Produto
   }
 
   type Usuario {
@@ -18,6 +19,14 @@ const typeDefs = gql`
     email: String
     salario: Float
     vip: Boolean
+  }
+
+  type Produto {
+    id: Int
+    nome: String
+    preco: Float
+    desconto: Float
+    precoDesconto: Float
   }
 `;
 
@@ -42,11 +51,26 @@ const resolvers = {
         vip: true,
       };
     },
+    melhorProduto() {
+      return {
+        id: 10,
+        nome: "lápis",
+        preco: 10,
+        desconto: 0.1,
+        precoDesconto: {},
+      };
+    },
   },
   Usuario: {
     nome(usuario) {
       //   console.log(usuario);
       return usuario.nome_completo;
+    },
+  },
+  Produto: {
+    precoDesconto(produto) {
+      const { preco, desconto } = produto;
+      return preco * (1 - desconto);
     },
   },
 };
