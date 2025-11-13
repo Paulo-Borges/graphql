@@ -36,11 +36,17 @@ const resolvers = {
     melhorUsuario() {
       return {
         id: 1,
-        nome: "Borges",
+        nome_completo: "Borges",
         email: "borges@email.com",
         salario: 16000.0,
         vip: true,
       };
+    },
+  },
+  Usuario: {
+    nome(usuario) {
+      //   console.log(usuario);
+      return usuario.nome_completo;
     },
   },
 };
