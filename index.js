@@ -11,6 +11,7 @@ const typeDefs = gql`
     dataAtual: Data
     melhorUsuario: Usuario!
     melhorProduto: Produto
+    numerosMegaSena: [Int!]!
   }
 
   type Usuario {
@@ -60,7 +61,17 @@ const resolvers = {
         precoDesconto: {},
       };
     },
+    numerosMegaSena() {
+      const arr = Array(6)
+        .fill(0)
+        .map(() => {
+          return Math.round(Math.random() * 60);
+        });
+      const arrOrdenado = arr.sort((a, b) => a - b);
+      return arrOrdenado;
+    },
   },
+
   Usuario: {
     nome(usuario) {
       //   console.log(usuario);
